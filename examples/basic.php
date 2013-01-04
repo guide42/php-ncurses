@@ -20,10 +20,18 @@ use Ncurses\Widget;
 
 // Init Ncurses
 $ncurses = new Ncurses();
-$person = new Widget\Label(" O\n/|\\\n ^", new Rect(1, 1));
+$ncurses->cursorVisibility(false);
 
-// Create a Window with a Hello World centered
-$window = new Window(new Rect(0, 0, 24, 96));
+// Create a Window the same size of the Screen
+$window = new Window($ncurses->getScreenRect());
+
+// Create a center Hello World label
+$helloWorld = new Widget\Label('Hello World', new Rect(0, 0));
+$helloWorld->rect->center = $window->rect->center;
+$window->widgets->add($helloWorld);
+
+// Create person
+$person = new Widget\Label(" O\n/|\\\n ^", new Rect(1, 1));
 $window->widgets->add($person);
 
 while (true) {

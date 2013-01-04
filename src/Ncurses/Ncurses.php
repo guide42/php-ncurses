@@ -2,6 +2,7 @@
 
 namespace Ncurses;
 
+use Ncurses\Util\Rect;
 use Ncurses\Event\Queue as EventQueue;
 use Ncurses\Event\Event;
 
@@ -21,7 +22,9 @@ class Ncurses
     public function __construct()
     {
         ncurses_init();
+        ncurses_cbreak();
         ncurses_noecho();
+        ncurses_nonl();
 
         $this->events = new EventQueue();
         $this->refresh(true);
@@ -60,5 +63,26 @@ class Ncurses
     public function sleep($milliseconds)
     {
         ncurses_napms($milliseconds);
+    }
+
+    /**
+     * Set cursor visibility.
+     *
+     * @param boolean $visibility
+     */
+    public function cursorVisibility($visibility)
+    {
+        ncurses_curs_set($visibility ? 1 : 0);
+    }
+
+    /**
+     * Returns the Screen Rect.
+     *
+     * @return \Ncurses\Util\Rect
+     */
+    public function getScreenRect()
+    {
+        ncurses_getmaxyx(STDSCR, $y, $x);
+        return new Rect(0, 0, $y, $x);
     }
 }
