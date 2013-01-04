@@ -16,6 +16,9 @@ class Ncurses
      */
     public $events;
 
+    public $rows;
+    public $cols;
+
     /**
      * Constructor.
      */
@@ -25,6 +28,8 @@ class Ncurses
         ncurses_cbreak();
         ncurses_noecho();
         ncurses_nonl();
+
+        ncurses_getmaxyx(STDSCR, $this->rows, $this->cols);
 
         $this->events = new EventQueue();
         $this->refresh(true);
@@ -73,16 +78,5 @@ class Ncurses
     public function cursorVisibility($visibility)
     {
         ncurses_curs_set($visibility ? 1 : 0);
-    }
-
-    /**
-     * Returns the Screen Rect.
-     *
-     * @return \Ncurses\Util\Rect
-     */
-    public function getScreenRect()
-    {
-        ncurses_getmaxyx(STDSCR, $y, $x);
-        return new Rect(0, 0, $y, $x);
     }
 }

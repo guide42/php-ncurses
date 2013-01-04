@@ -7,7 +7,6 @@ include_once $basedir . '/src/Ncurses/Event/Queue.php';
 include_once $basedir . '/src/Ncurses/Event/EventInterface.php';
 include_once $basedir . '/src/Ncurses/Event/Event.php';
 include_once $basedir . '/src/Ncurses/Util/Rect.php';
-include_once $basedir . '/src/Ncurses/Util/RelativeRect.php';
 include_once $basedir . '/src/Ncurses/Widget/Widget.php';
 include_once $basedir . '/src/Ncurses/Widget/WidgetGroup.php';
 include_once $basedir . '/src/Ncurses/Widget/Label.php';
