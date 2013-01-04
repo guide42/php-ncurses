@@ -1,16 +1,6 @@
 <?php
 
-$basedir = dirname(__DIR__);
-
-include_once $basedir . '/src/Ncurses/Ncurses.php';
-include_once $basedir . '/src/Ncurses/Event/Queue.php';
-include_once $basedir . '/src/Ncurses/Event/EventInterface.php';
-include_once $basedir . '/src/Ncurses/Event/Event.php';
-include_once $basedir . '/src/Ncurses/Util/Rect.php';
-include_once $basedir . '/src/Ncurses/Widget/Widget.php';
-include_once $basedir . '/src/Ncurses/Widget/WidgetGroup.php';
-include_once $basedir . '/src/Ncurses/Widget/Label.php';
-include_once $basedir . '/src/Ncurses/Window.php';
+include_once 'bootstrap.php';
 
 use Ncurses\Ncurses;
 use Ncurses\Event\Event;
@@ -52,7 +42,7 @@ while (true) {
     }
 
     $window->refresh();
-    $ncurses->refresh();
 
+    $ncurses->refresh();
     $ncurses->events->process();
 }
