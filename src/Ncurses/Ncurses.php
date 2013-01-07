@@ -44,6 +44,18 @@ class Ncurses
     }
 
     /**
+     * Stop using ncurses, clean up the screen.
+     */
+    public function stop()
+    {
+        if (!ncurses_isendwin()) {
+            ncurses_def_prog_mode();
+        }
+
+        ncurses_end();
+    }
+
+    /**
      * Compares the virtual screen to the physical screen and updates the
      * physical screen. If $force is TRUE, updates everything.
      *
@@ -51,6 +63,10 @@ class Ncurses
      */
     public function refresh($force = false)
     {
+        if (ncurses_isendwin()) {
+            ncurses_reset_prog_mode();
+        }
+
         ncurses_move(0, 0);
 
         if ($force) {
