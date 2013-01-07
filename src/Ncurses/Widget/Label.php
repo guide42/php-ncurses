@@ -27,14 +27,20 @@ class Label extends Widget
     public function __construct($text, Rect $rect)
     {
         $lines = explode("\n", $text);
-        $cols  = 0;
 
-        foreach ($lines as $line) {
-            $cols = max(array(strlen($line), $cols));
+        if (null === $rect->cols) {
+            $cols = 0;
+
+            foreach ($lines as $line) {
+                $cols = max(array(strlen($line), $cols));
+            }
+
+            $rect->cols = $cols;
         }
 
-        $rect->rows = count($lines);
-        $rect->cols = $cols;
+        if (null === $rect->rows) {
+            $rect->rows = count($lines);
+        }
 
         parent::__construct($rect);
 
@@ -64,10 +70,14 @@ class Label extends Widget
         }
 
         foreach ($this->lines as $i => $line) {
+            if ($i >= $this->rect->rows) {
+                break;
+            }
+
             ncurses_mvwaddstr($window->getResource(),
                 $this->rect->top + $i,
                 $this->rect->left,
-                $line
+                substr($line, 0, $this->rect->cols)
             );
         }
 
