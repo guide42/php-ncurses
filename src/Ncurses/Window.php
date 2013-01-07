@@ -26,6 +26,8 @@ class Window
      */
     public $widgets;
 
+    public $border = false;
+
     /**
      * Constructor.
      *
@@ -76,6 +78,11 @@ class Window
     public function refresh($force = false)
     {
         $this->erase();
+
+        if ($this->border) {
+            $this->border();
+        }
+
         $this->widgets->draw($this);
 
         if ($force) {
