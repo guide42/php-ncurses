@@ -18,6 +18,7 @@ $window = new Window(new Rect(0, 0, $ncurses->rows, $ncurses->cols));
 // Create a center Hello World label
 $helloWorld = new Widget\Label('Hello World', new Rect(0, 0));
 $helloWorld->rect->center = $window->rect->center;
+$helloWorld->bold = true;
 $window->widgets->add($helloWorld);
 
 // Create person
