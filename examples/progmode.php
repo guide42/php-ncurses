@@ -1,6 +1,6 @@
 <?php
 
-include_once 'bootstrap.php';
+include_once __DIR__ . '/../src/bootstrap.php';
 
 use Ncurses\Ncurses;
 use Ncurses\Event\Event;
