@@ -18,6 +18,8 @@ And then you need to enable the extension in your *php.ini* by adding::
 
     extension=ncurses.so
 
+PHPUnit is needed for running the test suite.
+
 Core Concepts
 -------------
 
