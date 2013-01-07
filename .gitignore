@@ -1,9 +1,5 @@
 .buildpath
 .project
 .settings/
-bin/
-vendor/*
-composer.lock
-composer.phar
 *.swp
 *~
