@@ -1,6 +1,6 @@
 <?php
 
-$basedir = __DIR__ . '/..';
+$basedir = dirname(__DIR__);
 
 include_once $basedir . '/src/Ncurses/Ncurses.php';
 include_once $basedir . '/src/Ncurses/Event/Queue.php';
