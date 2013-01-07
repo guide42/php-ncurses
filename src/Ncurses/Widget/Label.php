@@ -32,12 +32,6 @@ class Label extends Widget
             );
         }
 
-        if (null !== $rect->rows || null !== $rect->cols) {
-            throw new \InvalidArgumentException(
-                'Labels cannot be constraint. Use Widget\\Text instead.'
-            );
-        }
-
         parent::__construct($rect);
 
         $this->label = $label;
