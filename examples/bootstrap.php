@@ -10,4 +10,5 @@ include_once $basedir . '/src/Ncurses/Util/Rect.php';
 include_once $basedir . '/src/Ncurses/Widget/Widget.php';
 include_once $basedir . '/src/Ncurses/Widget/WidgetGroup.php';
 include_once $basedir . '/src/Ncurses/Widget/Label.php';
+include_once $basedir . '/src/Ncurses/Widget/Text.php';
 include_once $basedir . '/src/Ncurses/Window.php';

@@ -22,7 +22,7 @@ $helloWorld->bold = true;
 $window->widgets->add($helloWorld);
 
 // Create person
-$person = new Widget\Label(" O\n/|\\\n ^", new Rect(1, 1));
+$person = new Widget\Text(" O\n/|\\\n ^", new Rect(1, 1));
 $window->widgets->add($person);
 
 while (true) {

@@ -26,9 +26,9 @@ EOF;
 
 $ncurses = new Ncurses();
 
-$widget0 = new Widget\Label($text, new Rect(0, 0, 8, 72));
-$widget1 = new Widget\Label($text, new Rect(15, 0, null, 72));
-$widget2 = new Widget\Label($text, new Rect(30, 0, null, null));
+$widget0 = new Widget\Text($text, new Rect(0, 0, 8, 72));
+$widget1 = new Widget\Text($text, new Rect(15, 0, null, 72));
+$widget2 = new Widget\Text($text, new Rect(30, 0, null, null));
 
 $window = new Window(new Rect(0, 0, $ncurses->rows, $ncurses->cols));
 $window->widgets->add($widget0);

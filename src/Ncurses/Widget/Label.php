@@ -11,7 +11,7 @@ use Ncurses\Util\Rect;
  */
 class Label extends Widget
 {
-    protected $lines;
+    protected $label;
 
     public $bold = false;
     public $underline = false;
@@ -21,30 +21,26 @@ class Label extends Widget
     /**
      * Constructor.
      *
-     * @param string $text
+     * @param string $label
      * @param \Ncurses\Util\Rect $rect
      */
-    public function __construct($text, Rect $rect)
+    public function __construct($label, Rect $rect)
     {
-        $lines = explode("\n", $text);
-
-        if (null === $rect->cols) {
-            $cols = 0;
-
-            foreach ($lines as $line) {
-                $cols = max(array(strlen($line), $cols));
-            }
-
-            $rect->cols = $cols;
+        if (false !== strpos($label, "\n")) {
+            throw new \InvalidArgumentException(
+                'Label cannot have breaklines. Use Widget\\Text instead.'
+            );
         }
 
-        if (null === $rect->rows) {
-            $rect->rows = count($lines);
+        if (null !== $rect->rows || null !== $rect->cols) {
+            throw new \InvalidArgumentException(
+                'Labels cannot be constraint. Use Widget\\Text instead.'
+            );
         }
 
         parent::__construct($rect);
 
-        $this->lines = $lines;
+        $this->label = $label;
     }
 
     /**
@@ -69,17 +65,11 @@ class Label extends Widget
             ncurses_wattron($window->getResource(), NCURSES_A_BLINK);
         }
 
-        foreach ($this->lines as $i => $line) {
-            if ($i >= $this->rect->rows) {
-                break;
-            }
-
-            ncurses_mvwaddstr($window->getResource(),
-                $this->rect->top + $i,
-                $this->rect->left,
-                substr($line, 0, $this->rect->cols)
-            );
-        }
+        ncurses_mvwaddstr($window->getResource(),
+            $this->rect->top,
+            $this->rect->left,
+            $this->label
+        );
 
         if ($this->bold) {
             ncurses_wattroff($window->getResource(), NCURSES_A_BOLD);
