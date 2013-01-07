@@ -5,7 +5,6 @@ namespace Ncurses;
 use Ncurses\Util\Rect;
 use Ncurses\Widget\Widget;
 use Ncurses\Widget\WidgetGroup;
-use Ncurses\Widget\Label;
 
 /**
  * Window
@@ -44,7 +43,7 @@ class Window
         );
 
         if (!$this->window) {
-            ncurses_addstr('Window cannot be created.');
+            throw new \RuntimeException('Window cannot be created.');
         }
 
         $this->widgets = new WidgetGroup();
