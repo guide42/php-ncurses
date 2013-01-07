@@ -13,6 +13,9 @@ class Text extends Widget
 {
     protected $lines;
 
+    protected $rows;
+    protected $cols;
+
     /**
      * Constructor.
      *
@@ -21,25 +24,44 @@ class Text extends Widget
      */
     public function __construct($text, Rect $rect)
     {
-        $lines = explode("\n", $text);
+        parent::__construct($rect);
 
-        if (null === $rect->cols) {
+        if ($rect->rows !== null) {
+            $this->rows = $rect->rows;
+        }
+        if ($rect->cols !== null) {
+            $this->cols = $rect->cols;
+        }
+
+        $this->setText($text);
+    }
+
+    /**
+     * Assign text.
+     *
+     * @param string $text
+     */
+    public function setText($text)
+    {
+        $this->lines = explode(PHP_EOL, $text);
+
+        if (null !== $this->rows) {
+            $this->rect->rows = count($this->lines);
+        } else {
+            $this->rect->rows = $this->rows;
+        }
+
+        if (null !== $this->cols) {
             $cols = 0;
 
-            foreach ($lines as $line) {
+            foreach ($this->lines as $line) {
                 $cols = max(array(strlen($line), $cols));
             }
 
-            $rect->cols = $cols;
+            $this->rect->cols = $cols;
+        } else {
+            $this->rect->cols = $this->cols;
         }
-
-        if (null === $rect->rows) {
-            $rect->rows = count($lines);
-        }
-
-        parent::__construct($rect);
-
-        $this->lines = $lines;
     }
 
     /**
@@ -49,14 +71,18 @@ class Text extends Widget
     public function draw(Window $window)
     {
         foreach ($this->lines as $i => $line) {
-            if ($i >= $this->rect->rows) {
+            if (null !== $this->rows && $i >= $this->rows) {
                 break;
+            }
+
+            if (null !== $this->cols) {
+                $line = substr($line, 0, $this->cols);
             }
 
             ncurses_mvwaddstr($window->getResource(),
                 $this->rect->top + $i,
                 $this->rect->left,
-                substr($line, 0, $this->rect->cols)
+                $line
             );
         }
     }
