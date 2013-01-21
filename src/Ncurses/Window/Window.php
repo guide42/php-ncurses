@@ -52,6 +52,14 @@ class Window
     }
 
     /**
+     * Erase window contents.
+     */
+    public function clear()
+    {
+        ncurses_werase($this->window);
+    }
+
+    /**
      * Draw Window attributes.
      */
     public function draw()
@@ -70,12 +78,6 @@ class Window
      */
     public function refresh($force = false)
     {
-        // Erase window contents.
-        //ncurses_werase($this->window);
-
-        // Draw Window
-        $this->draw();
-
         if ($force) {
             ncurses_wrefresh($this->window);
         } else {

@@ -20,6 +20,7 @@ $string = new Widget\String('Hello World!', new Rect(2, 4));
 $string->setWindow($window);
 $string->draw();
 
+$window->draw();
 $window->refresh();
 
 $ncurses->refresh();
