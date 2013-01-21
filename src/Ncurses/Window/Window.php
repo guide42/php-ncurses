@@ -62,15 +62,24 @@ class Window
         // Erase window contents.
         //ncurses_werase($this->window);
 
-        //if ($this->border) {
-        //    // Draws a border around the window using attributed characters.
-        //    ncurses_wborder($this->window, 0, 0, 0, 0, 0, 0, 0, 0);
-        //}
+        // Draw Window
+        $this->draw();
 
         if ($force) {
             ncurses_wrefresh($this->window);
         } else {
             ncurses_wnoutrefresh($this->window);
+        }
+    }
+
+    /**
+     * Draw Window attributes.
+     */
+    public function draw()
+    {
+        if ($this->border) {
+            // Draws a border around the window using attributed characters.
+            ncurses_wborder($this->window, 0, 0, 0, 0, 0, 0, 0, 0);
         }
     }
 }
