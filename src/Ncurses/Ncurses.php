@@ -39,6 +39,7 @@ class Ncurses
         ncurses_noecho();
         ncurses_nonl();
 
+        ncurses_refresh();
         ncurses_getmaxyx(STDSCR, $this->rows, $this->cols);
     }
 
@@ -65,8 +66,6 @@ class Ncurses
         if (ncurses_isendwin()) {
             ncurses_reset_prog_mode();
         }
-
-        ncurses_move(0, 0);
 
         if ($force) {
             ncurses_refresh();
