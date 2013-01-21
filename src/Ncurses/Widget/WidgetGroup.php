@@ -2,8 +2,7 @@
 
 namespace Ncurses\Widget;
 
-use Ncurses\Window;
-use Ncurses\Widget\WidgetGroup;
+use Ncurses\Widget\Widget;
 
 /**
  * Widget Group
@@ -38,13 +37,11 @@ class WidgetGroup implements \IteratorAggregate, \Countable
 
     /**
      * Draws all widgets into the Window.
-     *
-     * @param \Ncurses\Window $window
      */
-    public function draw(Window $window)
+    public function draw()
     {
         foreach ($this->widgets as $widget) {
-            $widget->draw($window);
+            $widget->draw();
         }
     }
 

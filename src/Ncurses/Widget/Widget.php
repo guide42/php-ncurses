@@ -2,7 +2,7 @@
 
 namespace Ncurses\Widget;
 
-use Ncurses\Window;
+use Ncurses\Window\Window;
 use Ncurses\Util\Rect;
 
 /**
@@ -16,6 +16,11 @@ abstract class Widget
     public $rect;
 
     /**
+     * @var \Ncurses\Window\Window
+     */
+    protected $window;
+
+    /**
      * Constructor.
      *
      * @param \Ncurses\Util\Rect $rect
@@ -26,9 +31,27 @@ abstract class Widget
     }
 
     /**
-     * Draws a Widget into the Window.
+     * Set the Widget Window
      *
-     * @param \Ncurses\Window $window
+     * @param \Ncurses\Window\Window $window
      */
-    abstract public function draw(Window $window);
+    public function setWindow(Window $window)
+    {
+        $this->window = $window;
+    }
+
+    /**
+     * Get the Widget Window.
+     *
+     * @return \Ncurses\Window\Window
+     */
+    public function getWindow()
+    {
+        return $this->window;
+    }
+
+    /**
+     * Draws a Widget into the Window.
+     */
+    abstract public function draw();
 }
