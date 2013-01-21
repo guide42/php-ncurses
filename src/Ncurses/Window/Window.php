@@ -52,6 +52,17 @@ class Window
     }
 
     /**
+     * Draw Window attributes.
+     */
+    public function draw()
+    {
+        if ($this->border) {
+            // Draws a border around the window using attributed characters.
+            ncurses_wborder($this->window, 0, 0, 0, 0, 0, 0, 0, 0);
+        }
+    }
+
+    /**
      * Copies window to virtual screen. If $force is TRUE, refresh window on
      * terminal screen directly.
      *
@@ -69,17 +80,6 @@ class Window
             ncurses_wrefresh($this->window);
         } else {
             ncurses_wnoutrefresh($this->window);
-        }
-    }
-
-    /**
-     * Draw Window attributes.
-     */
-    public function draw()
-    {
-        if ($this->border) {
-            // Draws a border around the window using attributed characters.
-            ncurses_wborder($this->window, 0, 0, 0, 0, 0, 0, 0, 0);
         }
     }
 }
