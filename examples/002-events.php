@@ -1,4 +1,10 @@
 <?php
+/*!
+ * 002 Events Example
+ *
+ * Will log every key pressed until the escape key is pressed. After stoping
+ * the ncurses mode, will print the logged keys.
+ */
 
 include_once __DIR__ . '/../src/bootstrap.php';
 
