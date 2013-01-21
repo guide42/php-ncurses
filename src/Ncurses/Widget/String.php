@@ -34,7 +34,7 @@ class String extends Widget
         ncurses_mvwaddstr($this->getWindow()->getResource(),
             $this->rect->top,
             $this->rect->left,
-            $this->label
+            $this->string
         );
     }
 }

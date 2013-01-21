@@ -14,7 +14,6 @@ use Ncurses\Window\Window;
 
 $ncurses = new Ncurses();
 $ncurses->start();
-$ncurses->refresh(true);
 
 $window0 = new Window(new Rect(5, 10, 5, 10));
 $window0->border = true;

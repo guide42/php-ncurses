@@ -28,7 +28,17 @@ class Window
      */
     public function __construct(Rect $rect)
     {
-        $this->rect = $rect;
+        $this->rect   = $rect;
+        $this->window = ncurses_newwin(
+                $this->rect->rows,
+                $this->rect->cols,
+                $this->rect->top,
+                $this->rect->left
+        );
+
+        if (!$this->window) {
+            throw new \RuntimeException('Window cannot be created.');
+        }
     }
 
     /**
@@ -49,26 +59,13 @@ class Window
      */
     public function refresh($force = false)
     {
-        if (null === $this->window) {
-            $this->window = ncurses_newwin(
-                    $this->rect->rows,
-                    $this->rect->cols,
-                    $this->rect->top,
-                    $this->rect->left
-            );
-
-            if (!$this->window) {
-                throw new \RuntimeException('Window cannot be created.');
-            }
-        }
-
         // Erase window contents.
-        ncurses_werase($this->window);
+        //ncurses_werase($this->window);
 
-        if ($this->border) {
-            // Draws a border around the window using attributed characters.
-            ncurses_wborder($this->window, 0, 0, 0, 0, 0, 0, 0, 0);
-        }
+        //if ($this->border) {
+        //    // Draws a border around the window using attributed characters.
+        //    ncurses_wborder($this->window, 0, 0, 0, 0, 0, 0, 0, 0);
+        //}
 
         if ($force) {
             ncurses_wrefresh($this->window);
