@@ -2,9 +2,7 @@
 
 namespace Ncurses;
 
-use Ncurses\Util\Rect;
 use Ncurses\Event\Queue as EventQueue;
-use Ncurses\Event\Event;
 
 /**
  * Ncurses
@@ -24,23 +22,24 @@ class Ncurses
      */
     public function __construct()
     {
+        $this->events = new EventQueue();
+    }
+
+    /**
+     * Start using ncurses.
+     */
+    public function start()
+    {
+        if (defined('STDSCR')) {
+            return;
+        }
+
         ncurses_init();
         ncurses_cbreak();
         ncurses_noecho();
         ncurses_nonl();
 
         ncurses_getmaxyx(STDSCR, $this->rows, $this->cols);
-
-        $this->events = new EventQueue();
-        $this->refresh(true);
-    }
-
-    /**
-     * Destructor.
-     */
-    public function __destruct()
-    {
-        ncurses_end();
     }
 
     /**
@@ -84,15 +83,5 @@ class Ncurses
     public function sleep($milliseconds)
     {
         ncurses_napms($milliseconds);
-    }
-
-    /**
-     * Set cursor visibility.
-     *
-     * @param boolean $visibility
-     */
-    public function cursorVisibility($visibility)
-    {
-        ncurses_curs_set($visibility ? 1 : 0);
     }
 }
