@@ -2,7 +2,7 @@
 
 namespace Ncurses;
 
-use Ncurses\Event\Queue as EventQueue;
+use Ncurses\Event\EventQueue;
 
 /**
  * Ncurses
@@ -10,7 +10,7 @@ use Ncurses\Event\Queue as EventQueue;
 class Ncurses
 {
     /**
-     * @var \Ncurses\Event\Queue
+     * @var \Ncurses\Event\EventQueue
      */
     public $events;
 

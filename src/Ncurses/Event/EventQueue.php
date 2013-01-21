@@ -2,10 +2,12 @@
 
 namespace Ncurses\Event;
 
+use Ncurses\Event\KeyEvent;
+
 /**
  * The queue is a regular queue of Event objects.
  */
-class Queue extends \SplQueue
+class EventQueue extends \SplQueue
 {
     /**
      * Constructor.
@@ -28,16 +30,8 @@ class Queue extends \SplQueue
         $ch = ncurses_getch();
 
         switch ($ch) {
-            case NCURSES_KEY_MOUSE:
-                if (!ncurses_getmouse($mevent)) {
-                    $this->enqueue(new Event(Event::TYPE_MOUSE, $mevent));
-                }
-                break;
-
             default:
-                $this->enqueue(new Event(Event::TYPE_KEY, array(
-                    'key' => $ch,
-                )));
+                $this->enqueue(new KeyEvent($ch));
                 break;
         }
     }
