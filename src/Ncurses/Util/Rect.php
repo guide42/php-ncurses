@@ -72,7 +72,7 @@ class Rect
                 $this->centerx = $value[1];
                 break;
             case 'centery':
-                $this->top  = $value - ceil($this->rows / 2);
+                $this->top = $value - ceil($this->rows / 2);
                 break;
             case 'centerx':
                 $this->left = $value - ceil($this->cols / 2);
