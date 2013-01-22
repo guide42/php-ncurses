@@ -19,21 +19,36 @@ class Window
      */
     public $rect;
 
+    public $name;
+
     public $border = false;
 
     /**
      * Constructor.
      *
+     * @param string             $name
      * @param \Ncurses\Util\Rect $rect
      */
-    public function __construct(Rect $rect)
+    public function __construct($name, Rect $rect)
     {
-        $this->rect   = $rect;
+        $this->name = $name;
+        $this->rect = $rect;
+
+        $this->init();
+    }
+
+    /**
+     * Init the window resource.
+     *
+     * @throws \RuntimeException
+     */
+    protected function init()
+    {
         $this->window = ncurses_newwin(
-                $this->rect->rows,
-                $this->rect->cols,
-                $this->rect->top,
-                $this->rect->left
+            $this->rect->rows,
+            $this->rect->cols,
+            $this->rect->top,
+            $this->rect->left
         );
 
         if (!$this->window) {
