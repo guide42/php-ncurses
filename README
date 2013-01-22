@@ -26,35 +26,3 @@ Core Concepts
 The core class is ``\Ncurses\Ncurses`` that is needed to be instanced for
 everything to work. It contains several methods to be applied to the standard
 screen (the whole application) and an unique instance of the event queue.
-
-Usage
------
-
-    <?php
-    
-    use Ncurses\Ncurses;
-    use Ncurses\Event\Event;
-    use Ncurses\Window;
-    use Ncurses\Widget;
-    
-    $ncurses = new Ncurses();
-    $window  = new Window(new Rect(0, 0, $ncurses->rows, $ncurses->cols));
-    
-    $helloWorld = new Widget\Label('Hello World', new Rect(0, 0));
-    $helloWorld->rect->center = $window->rect->center;
-    $window->widgets->add($helloWorld);
-    
-    while (true) {
-        foreach ($ncurses->events as $event) {
-            if ($event->type === Event::TYPE_KEY) {
-                if ($event->key === 113) {
-                    return;
-                }
-            }
-        }
-        
-        $window->refresh();
-        
-        $ncurses->refresh();
-        $ncurses->events->process();
-    }

@@ -72,10 +72,10 @@ class Rect
                 $this->centerx = $value[1];
                 break;
             case 'centery':
-                $this->top  = $value - floor($this->rows / 2);
+                $this->top  = $value - ceil($this->rows / 2);
                 break;
             case 'centerx':
-                $this->left = $value - floor($this->cols / 2);
+                $this->left = $value - ceil($this->cols / 2);
                 break;
             default:
                 throw new \OutOfBoundsException('Invalid key.');
