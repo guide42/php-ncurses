@@ -14,9 +14,6 @@ class Ncurses
      */
     public $events;
 
-    public $rows;
-    public $cols;
-
     /**
      * Constructor.
      */
@@ -40,7 +37,6 @@ class Ncurses
         ncurses_nonl();
 
         ncurses_refresh();
-        ncurses_getmaxyx(STDSCR, $this->rows, $this->cols);
     }
 
     /**
