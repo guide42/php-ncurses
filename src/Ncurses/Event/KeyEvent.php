@@ -5,7 +5,7 @@ namespace Ncurses\Event;
 use Ncurses\Event\Event;
 
 /**
- * A keyboard event.
+ * Keyboard Event.
  */
 class KeyEvent extends Event
 {
@@ -19,5 +19,15 @@ class KeyEvent extends Event
     public function __construct($key)
     {
         $this->key = $key;
+    }
+
+    /**
+     * String representation.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf('<Key (%d)>', $this->key);
     }
 }

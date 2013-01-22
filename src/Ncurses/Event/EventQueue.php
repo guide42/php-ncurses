@@ -2,6 +2,7 @@
 
 namespace Ncurses\Event;
 
+use Ncurses\Event\ResizeEvent;
 use Ncurses\Event\KeyEvent;
 
 /**
@@ -30,6 +31,23 @@ class EventQueue extends \SplQueue
         $ch = ncurses_getch();
 
         switch ($ch) {
+            case -1: // ERR
+                break;
+
+            case NCURSES_KEY_MOUSE: // 409
+                break;
+
+            case NCURSES_KEY_RESIZE: // 410
+                $rows = null;
+                $cols = null;
+
+                // Gets the horizontal and vertical size of the main window,
+                // which must be the same as the terminal size.
+                ncurses_getmaxyx(STDSCR, $rows, $cols);
+
+                $this->enqueue(new ResizeEvent($rows, $cols));
+                break;
+
             default:
                 $this->enqueue(new KeyEvent($ch));
                 break;
