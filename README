@@ -1,6 +1,12 @@
 PHP Ncurses
 ===========
 
+**ATENTION**: THIS IS A DEPRECATED PACKAGE. USE [STENCIL] INSTEAD.
+
+[STENCIL]: https://github.com/guide42/stencil
+
+---
+
 This is an interface for Ncurses PHP extension. Is highly object-oriented by
 design and brings new concepts to the ncurses world.
 
